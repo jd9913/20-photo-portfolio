@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import photo from '../../assets/small/commercial/0.jpg';
-
-
-function PhotoList() {
+const PhotoList = ({ category }) => {
 
   const [photos] = useState([
     {
@@ -103,16 +100,22 @@ function PhotoList() {
     },
   ]);
 
-
+  const currentPhotos = photos.filter((photo) => photo.category === category);
 
   return (
     <div>
-        <img
-          src={photo}
-          alt="Commercial Example"
-        />
+      <div className="flex-row">
+        {currentPhotos.map((image, i) => (
+          <img
+            src={require(`../../assets/small/${category}/${i}.jpg`)}
+            alt={image.name}
+            className="img-thumbnail mx-1"
+            key={image.name}
+          />
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default PhotoList;
